@@ -1,3 +1,5 @@
+![Banner](banner.png)
+
 # ac-SuspiciousFileScanner
 Scans files for indicators of suspicious characteristics such as high entropy, embedded resources (e.g., ZIP archives), unusually long strings, or unusual file headers based on magic number analysis. - Focused on Tools for collecting, indexing, and categorizing digital artifacts based on file type, embedded metadata, YARA rules, and other indicators. Useful for incident response and threat intelligence gathering. This differs from analysis as it is largely focused on *organizing* and *cataloging* discovered files.
 
