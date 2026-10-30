@@ -1,11 +1,12 @@
 import argparse
 import logging
+import math
 import os
-import hashlib
-import zipfile
-import pefile
-import yara
+import sys
+from collections import Counter
+
 import filetype
+import yara
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -24,11 +25,13 @@ def calculate_entropy(data):
     """
     if not data:
         return 0
+    # Counter walks the data once. The loop this replaces called
+    # data.count(x) for every byte value, rescanning the whole buffer
+    # 256 times, which hurt on the large files this tool exists for.
     entropy = 0
-    for x in range(256):
-        p_x = float(data.count(x)) / len(data)
-        if p_x > 0:
-            entropy += - p_x * math.log2(p_x)
+    for count in Counter(data).values():
+        p_x = count / len(data)
+        entropy += -p_x * math.log2(p_x)
     return entropy
 
 
@@ -67,14 +70,13 @@ def detect_long_strings(file_path, min_length=50):
         with open(file_path, 'rb') as f:
             content = f.read()
             
-            # Decode as UTF-8, ignore errors for non-text files
-            try:
-                text = content.decode('utf-8', errors='ignore')
-            except UnicodeDecodeError as e:
-                logging.warning(f"UnicodeDecodeError decoding {file_path}: {e}")
-                text = content.decode('latin-1', errors='ignore') # Try latin-1 as fallback
+            # errors="ignore" means this decode cannot raise, so the old
+            # UnicodeDecodeError fallback under it was dead code. Dropping
+            # undecodable bytes is fine here: a long unbroken printable run
+            # is the signal, and broken bytes would end the run anyway.
+            text = content.decode('utf-8', errors='ignore')
 
-            
+
             current_string = ""
             for char in text:
                 if char.isprintable():
@@ -147,6 +149,9 @@ def compile_yara_rules(yara_rules_dir):
     Returns:
         A compiled YARA rules object, or None if an error occurs.
     """
+    # Rules are compiled on every scan. That is a deliberate trade for a
+    # one-file-at-a-time CLI: no cache to keep in sync with the rules on
+    # disk, and the compile cost is small next to reading the target.
     try:
         rules = {}
         for filename in os.listdir(yara_rules_dir):
@@ -195,10 +200,11 @@ def main():
     entropy_threshold = args.entropy_threshold
     min_string_length = args.min_string_length
 
-    # Input validation
+    # Input validation. Exit nonzero so a script chaining scans can tell
+    # "file missing" apart from "file scanned and clean".
     if not os.path.isfile(file_path):
         logging.error(f"Error: File not found: {file_path}")
-        return
+        sys.exit(1)
 
     if not os.path.isdir(yara_rules_dir):
         logging.warning(f"Warning: YARA rules directory not found: {yara_rules_dir}. Skipping YARA scanning.")
@@ -209,7 +215,6 @@ def main():
             file_content = f.read()
 
         # Calculate entropy
-        import math
         entropy = calculate_entropy(file_content)
         print(f"Entropy: {entropy}")
         if entropy > entropy_threshold:
@@ -240,6 +245,7 @@ def main():
 
     except Exception as e:
         logging.error(f"An unexpected error occurred: {e}")
+        sys.exit(1)
 
 
 if __name__ == "__main__":
