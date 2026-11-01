@@ -35,6 +35,12 @@ def calculate_entropy(data):
     return entropy
 
 
+# I only look for the local file header signature anywhere in the raw
+# bytes. That catches a ZIP appended after other data, which is the case
+# I care about, but it also means four matching bytes inside unrelated
+# data read as a hit. I accept that false positive here because the
+# output says suspicious, not proven, and a real archive check would
+# need to parse candidate offsets instead of scanning for magic.
 def detect_embedded_zip(file_path):
     """Detects if a file contains an embedded ZIP archive.
 
@@ -85,7 +91,9 @@ def detect_long_strings(file_path, min_length=50):
                     if len(current_string) >= min_length:
                         long_strings.append(current_string)
                     current_string = ""
-            # Check for a long string at the end
+            # The loop only flushes a run when a non-printable byte ends
+            # it, so a file that ends mid-run needs this second check or
+            # its last string is silently dropped.
             if len(current_string) >= min_length:
                 long_strings.append(current_string)
 
@@ -104,6 +112,10 @@ def analyze_file_header(file_path):
         A string describing the detected file type based on magic number,
         or None if the file type cannot be determined.
     """
+    # Both the unknown case and the error case below return the same
+    # "File type: Unknown" string. I keep it that way on purpose: the
+    # caller prints this line either way, and the logged error is where
+    # the difference lives if I ever need to chase it.
     try:
         kind = filetype.guess(file_path)
         if kind is not None:
@@ -208,13 +220,21 @@ def main():
 
     if not os.path.isdir(yara_rules_dir):
         logging.warning(f"Warning: YARA rules directory not found: {yara_rules_dir}. Skipping YARA scanning.")
+        # A missing rules directory downgrades the run instead of failing
+        # it, because the other checks still say something useful. The
+        # trade is a quieter failure: the exit code stays 0 further down
+        # even though one whole scan never ran, so I rely on this warning
+        # being read.
         yara_rules_dir = None # Disable YARA scanning
 
     try:
         with open(file_path, 'rb') as f:
             file_content = f.read()
 
-        # Calculate entropy
+        # Each detector below reopens the file by path instead of taking
+        # this buffer. That wastes reads, but it keeps every check usable
+        # on its own. The catch I accept: if the file changes on disk
+        # mid-run, the checks are no longer all looking at the same bytes.
         entropy = calculate_entropy(file_content)
         print(f"Entropy: {entropy}")
         if entropy > entropy_threshold:
@@ -229,7 +249,10 @@ def main():
         if long_strings:
             print("Suspicious: Long strings detected:")
             for string in long_strings:
-                print(f"  - {string[:100]}...") # Print first 100 chars
+                # I cap the print at 100 characters because the strings
+                # this hunts for can run to thousands, and the full value
+                # adds nothing once the run itself is the finding.
+                print(f"  - {string[:100]}...")
 
         # Analyze file header
         header_analysis = analyze_file_header(file_path)
