@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300" role="img" aria-label="A bloom of moon jellies in three bands of water: light coins shifting at the surface, bells pulsing one at a time in the middle band, particles drifting in the dark water below">
+<rect x="0" y="0" width="1200" height="86" fill="#a8dfe4"/>
+<g fill="#fff6d6">
+<ellipse cx="140" cy="30" rx="34" ry="8" opacity="0.7"><animate attributeName="cx" values="140;168;140" dur="17s" repeatCount="indefinite"/></ellipse>
+<ellipse cx="420" cy="20" rx="26" ry="6" opacity="0.55"><animate attributeName="cx" values="420;398;420" dur="21s" repeatCount="indefinite"/></ellipse>
+<ellipse cx="700" cy="34" rx="40" ry="9" opacity="0.65"><animate attributeName="cx" values="700;730;700" dur="19s" repeatCount="indefinite"/></ellipse>
+<ellipse cx="980" cy="24" rx="28" ry="7" opacity="0.5"><animate attributeName="cx" values="980;958;980" dur="23s" repeatCount="indefinite"/></ellipse>
+</g>
+<rect x="0" y="86" width="1200" height="128" fill="#3d9db4"/>
+<g id="bell1">
+<ellipse cx="240" cy="140" rx="52" ry="36" fill="#8fe0dc" opacity="0.9">
+<animate attributeName="rx" values="52;52;40;52;52" keyTimes="0;0.42;0.5;0.58;1" dur="36s" repeatCount="indefinite"/>
+<animate attributeName="ry" values="36;36;29;36;36" keyTimes="0;0.42;0.5;0.58;1" dur="36s" repeatCount="indefinite"/>
+</ellipse>
+<path d="M196,168 q10,26 4,48 M222,174 q8,24 2,44 M252,174 q-4,24 2,44 M280,168 q-8,24 -2,46" stroke="#f2b6ba" stroke-width="5" fill="none" opacity="0.8"/>
+<path d="M200,170 v34 M216,173 v40 M236,175 v30 M262,175 v38 M282,170 v32" stroke="#d8f6f4" stroke-width="1.4"/>
+<animateTransform attributeName="transform" type="translate" values="0,0; 0,0; 14,-6; 14,-6; 0,0" keyTimes="0;0.42;0.58;0.9;1" dur="36s" repeatCount="indefinite"/>
+</g>
+<g id="bell2">
+<ellipse cx="560" cy="128" rx="42" ry="29" fill="#8fe0dc" opacity="0.85">
+<animate attributeName="rx" values="42;42;33;42;42" keyTimes="0;0.08;0.16;0.24;1" dur="36s" repeatCount="indefinite"/>
+<animate attributeName="ry" values="29;29;23;29;29" keyTimes="0;0.08;0.16;0.24;1" dur="36s" repeatCount="indefinite"/>
+</ellipse>
+<path d="M526,150 q8,20 3,38 M548,155 q6,18 1,34 M574,155 q-3,18 1,34 M596,150 q-6,18 -2,36" stroke="#f2b6ba" stroke-width="4" fill="none" opacity="0.75"/>
+<path d="M530,152 v28 M546,155 v32 M566,156 v26 M586,153 v30" stroke="#d8f6f4" stroke-width="1.2"/>
+<animateTransform attributeName="transform" type="translate" values="0,0; 0,0; 12,-5; 12,-5; 0,0" keyTimes="0;0.08;0.24;0.9;1" dur="36s" repeatCount="indefinite"/>
+</g>
+<g id="bell3">
+<ellipse cx="880" cy="146" rx="36" ry="25" fill="#8fe0dc" opacity="0.8">
+<animate attributeName="rx" values="36;36;28;36;36" keyTimes="0;0.68;0.76;0.84;1" dur="36s" repeatCount="indefinite"/>
+<animate attributeName="ry" values="25;25;20;25;25" keyTimes="0;0.68;0.76;0.84;1" dur="36s" repeatCount="indefinite"/>
+</ellipse>
+<path d="M852,165 q7,17 2,32 M872,169 q5,15 1,29 M894,169 q-3,15 1,29 M912,165 q-5,15 -1,30" stroke="#f2b6ba" stroke-width="3.5" fill="none" opacity="0.7"/>
+<path d="M856,167 v24 M872,170 v27 M890,170 v22 M906,167 v25" stroke="#d8f6f4" stroke-width="1.1"/>
+<animateTransform attributeName="transform" type="translate" values="0,0; 0,0; 10,-4; 10,-4; 0,0" keyTimes="0;0.68;0.84;0.95;1" dur="36s" repeatCount="indefinite"/>
+</g>
+<rect x="0" y="214" width="1200" height="86" fill="#175d7d"/>
+<g fill="#fff4cd">
+<circle cx="180" cy="248" r="1.8" opacity="0.6"><animate attributeName="cx" values="180;206;180" dur="26s" repeatCount="indefinite"/></circle>
+<circle cx="470" cy="266" r="1.4" opacity="0.5"><animate attributeName="cx" values="470;448;470" dur="31s" repeatCount="indefinite"/></circle>
+<circle cx="760" cy="240" r="1.7" opacity="0.55"><animate attributeName="cx" values="760;784;760" dur="29s" repeatCount="indefinite"/></circle>
+<circle cx="1030" cy="262" r="1.3" opacity="0.5"><animate attributeName="cx" values="1030;1008;1030" dur="34s" repeatCount="indefinite"/></circle>
+</g>
+<path d="M-40,292 q60,-8 130,0 t140,0 t140,0" stroke="#bfeeea" stroke-width="1.6" fill="none" opacity="0.5">
+<animateTransform attributeName="transform" type="translate" values="0,0; 1240,0" dur="44s" repeatCount="indefinite"/>
+</path>
+</svg>

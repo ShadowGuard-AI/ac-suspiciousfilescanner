@@ -1,4 +1,10 @@
-![Banner](banner.png)
+![Moon jelly bloom in lit water, one large bell glowing in the foreground](intro-banner.png)
+
+# ac-SuspiciousFileScanner
+
+![Bloom in ranks moving one way, the name lettered along a pale drift line](banner.png)
+
+![Animated bloom in three bands of water, bells pulsing one at a time](scene.svg)
 
 # ac-SuspiciousFileScanner
 Scans one file for indicators of suspicious characteristics: high entropy, an embedded ZIP signature, unusually long printable strings, a file type from magic bytes, and YARA rule matches.
@@ -10,10 +16,14 @@ cd ac-suspiciousfilescanner
 pip install -r requirements.txt
 ```
 
+![Pulse line divider with one contracted bell at its midpoint](sep-heavy.svg)
+
 ## Usage
 ```
 python3 main.py FILE_PATH [--yara-rules-dir DIR] [--entropy-threshold NUMBER] [--min-string-length NUMBER]
 ```
+
+![Pulse line divider](sep-light.svg)
 
 ## Parameters
 - `FILE_PATH`: the path to the file to scan.
@@ -22,12 +32,20 @@ python3 main.py FILE_PATH [--yara-rules-dir DIR] [--entropy-threshold NUMBER] [-
 - `--entropy-threshold`: threshold for considering entropy as high. Default: 6.0.
 - `--min-string-length`: minimum length for considering strings as long. Default: 50.
 
+![Pulse line divider](sep-light.svg)
+
 ## Verified behavior
 - A missing input file exits 1.
 - If the YARA rules directory does not exist, the run logs a warning and skips YARA scanning, and the other checks still run.
 - Printed long strings are capped at 100 characters.
 - The ZIP check is a search for the `PK\x03\x04` signature bytes in the file, not a parsed archive check, so a hit means a signature was found, not a proven embedded archive.
 - Live run not possible in this environment: the `filetype` and `yara` packages are not installed here and installs are not permitted in this wave. The parameter list above is taken from the argument parser in `main.py`, and the file compiles cleanly.
+
+![Pulse line divider](sep-light.svg)
+
+> Sample jar, read before scanning: A Signature Is Not an Archive. The ZIP check searches for the signature bytes named in the list above, so a hit reports a signature found, not a proven embedded archive.
+>
+> Sample jar, the missing folder: if the YARA rules directory does not exist, the run logs a warning and skips YARA scanning, and the other checks still run.
 
 ## License
 MIT License, see LICENSE.
