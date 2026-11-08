@@ -1,8 +1,10 @@
-![Moon jelly bloom in lit water, one large bell glowing in the foreground](intro-banner.png)
+![Intro scenery: a gloved hand lifting one small inner packet from deep inside an opened black case on a steel inspection bench, sorted trays and a magnifier lamp behind it and an orange inspection tag waiting on the bench](intro-banner.png)
 
 # ac-SuspiciousFileScanner
 
-![Bloom in ranks moving one way, the name lettered along a pale drift line](banner.png)
+![Wordmark banner: a long steel bench in a bright customs inspection hall, one open black case at its centre with sorted trays behind it and its contents laid in a row along the bench front, a magnifier lamp above and one orange tag on a folded cloth](banner.png)
+
+<p align="center"><img src="logo.png" alt="ac-suspiciousfilescanner logo: an open black case photographed from directly above on a steel bench, its contents laid out in one neat row beside it, a multi-tool, a passport, a leather key fob and a pen, with a single orange inspection tag tied below and cream gloved hands resting at the frame edges" width="200"></p>
 
 ![Animated bloom in three bands of water, bells pulsing one at a time](scene.svg)
 
