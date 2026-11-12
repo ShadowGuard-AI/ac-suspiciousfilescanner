@@ -49,4 +49,4 @@ python3 main.py FILE_PATH [--yara-rules-dir DIR] [--entropy-threshold NUMBER] [-
 > Sample jar, the missing folder: if the YARA rules directory does not exist, the run logs a warning and skips YARA scanning, and the other checks still run.
 
 ## License
-MIT License, see LICENSE.
+MIT License, see [LICENSE](LICENSE).
