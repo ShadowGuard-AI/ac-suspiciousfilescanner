@@ -8,11 +8,10 @@
 
 ![Animated bloom in three bands of water, bells pulsing one at a time](scene.svg)
 
-# ac-SuspiciousFileScanner
 Scans one file for indicators of suspicious characteristics: high entropy, an embedded ZIP signature, unusually long printable strings, a file type from magic bytes, and YARA rule matches.
 
 ## Install
-```
+```sh
 git clone https://github.com/ShadowGuard-AI/ac-suspiciousfilescanner
 cd ac-suspiciousfilescanner
 pip install -r requirements.txt
@@ -21,7 +20,7 @@ pip install -r requirements.txt
 ![Pulse line divider with one contracted bell at its midpoint](sep-heavy.svg)
 
 ## Usage
-```
+```sh
 python3 main.py FILE_PATH [--yara-rules-dir DIR] [--entropy-threshold NUMBER] [--min-string-length NUMBER]
 ```
 
